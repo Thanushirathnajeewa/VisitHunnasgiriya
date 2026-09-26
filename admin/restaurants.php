@@ -1,0 +1,7 @@
+<?php
+require "../config/db.php";require "auth.php";
+if(isset($_GET['delete'])){$pdo->prepare("DELETE FROM restaurants WHERE restaurant_id=?")->execute([(int)$_GET['delete']]);header("Location: restaurants.php");exit;}
+$rows=$pdo->query("SELECT r.*,a.name attraction_name FROM restaurants r LEFT JOIN attractions a ON r.attraction_id=a.attraction_id ORDER BY r.restaurant_id DESC")->fetchAll();
+$pageTitle="Restaurants";include "header.php";?>
+<section class="section container"><div style="display:flex;justify-content:space-between;align-items:center"><h1>Restaurants & Cafés</h1><a class="btn" href="restaurant_form.php">Add Restaurant</a></div><div class="table-wrap"><table class="table"><tr><th>Name</th><th>Attraction</th><th>Location</th><th>Spending</th><th>Actions</th></tr><?php foreach($rows as $r):?><tr><td><?=htmlspecialchars($r['name'])?></td><td><?=htmlspecialchars($r['attraction_name']??'')?></td><td><?=htmlspecialchars($r['location'])?></td><td>Rs. <?=htmlspecialchars($r['estimated_spending'])?></td><td><a class="btn" href="restaurant_form.php?id=<?=$r['restaurant_id']?>">Edit</a> <a class="btn danger" href="?delete=<?=$r['restaurant_id']?>" onclick="return confirm('Delete?')">Delete</a></td></tr><?php endforeach;?></table></div></section>
+<?php include "footer.php"; ?>

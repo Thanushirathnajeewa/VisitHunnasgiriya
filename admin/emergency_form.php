@@ -1,0 +1,7 @@
+<?php
+require "../config/db.php";require "auth.php";$id=(int)($_GET['id']??0);$edit=$id>0;$r=['service_name'=>'','contact_number'=>'','description'=>''];
+if($edit){$s=$pdo->prepare("SELECT * FROM emergency_contacts WHERE contact_id=?");$s->execute([$id]);$r=$s->fetch();}
+if($_SERVER['REQUEST_METHOD']==='POST'){if($edit)$pdo->prepare("UPDATE emergency_contacts SET service_name=?,contact_number=?,description=? WHERE contact_id=?")->execute([$_POST['service_name'],$_POST['contact_number'],$_POST['description'],$id]);else$pdo->prepare("INSERT INTO emergency_contacts(service_name,contact_number,description) VALUES(?,?,?)")->execute([$_POST['service_name'],$_POST['contact_number'],$_POST['description']]);header("Location: emergency.php");exit;}
+$pageTitle=$edit?"Edit Contact":"Add Contact";include "header.php";?>
+<section class="section container"><div class="form-card"><h1><?=$pageTitle?></h1><form method="post"><?php foreach($r as $f=>$v): if($f==='contact_id')continue;?><div class="form-group"><label><?=ucwords(str_replace('_',' ',$f))?></label><?php if($f==='description'):?><textarea class="form-control" name="<?=$f?>" rows="4"><?=htmlspecialchars($v)?></textarea><?php else:?><input class="form-control" name="<?=$f?>" value="<?=htmlspecialchars($v)?>" required><?php endif;?></div><?php endforeach;?><button class="btn">Save</button> <a class="btn secondary" href="emergency.php">Cancel</a></form></div></section>
+<?php include "footer.php"; ?>

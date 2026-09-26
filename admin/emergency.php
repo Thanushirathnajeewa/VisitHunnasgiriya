@@ -1,0 +1,6 @@
+<?php
+require "../config/db.php";require "auth.php";
+if(isset($_GET['delete'])){$pdo->prepare("DELETE FROM emergency_contacts WHERE contact_id=?")->execute([(int)$_GET['delete']]);header("Location: emergency.php");exit;}
+$rows=$pdo->query("SELECT * FROM emergency_contacts ORDER BY service_name")->fetchAll();$pageTitle="Emergency Contacts";include "header.php";?>
+<section class="section container"><div style="display:flex;justify-content:space-between;align-items:center"><h1>Emergency Contacts</h1><a class="btn" href="emergency_form.php">Add Contact</a></div><div class="table-wrap"><table class="table"><tr><th>Service</th><th>Number</th><th>Description</th><th>Actions</th></tr><?php foreach($rows as $r):?><tr><td><?=htmlspecialchars($r['service_name'])?></td><td><?=htmlspecialchars($r['contact_number'])?></td><td><?=htmlspecialchars($r['description'])?></td><td><a class="btn" href="emergency_form.php?id=<?=$r['contact_id']?>">Edit</a> <a class="btn danger" href="?delete=<?=$r['contact_id']?>" onclick="return confirm('Delete?')">Delete</a></td></tr><?php endforeach;?></table></div></section>
+<?php include "footer.php"; ?>

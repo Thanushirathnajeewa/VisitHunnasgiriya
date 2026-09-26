@@ -1,0 +1,7 @@
+<?php
+require_once '../config/db.php'; require_once 'auth.php';
+$id=(int)($_GET['id']??0);$edit=$id>0;$name='';$error='';
+if($edit){$s=$pdo->prepare('SELECT category_name FROM categories WHERE category_id=?');$s->execute([$id]);$r=$s->fetch(PDO::FETCH_ASSOC);if(!$r)exit('Category not found.');$name=$r['category_name'];}
+if($_SERVER['REQUEST_METHOD']==='POST'){$name=trim($_POST['category_name']??'');if($name==='')$error='Category name is required.';else{try{if($edit){$s=$pdo->prepare('UPDATE categories SET category_name=? WHERE category_id=?');$s->execute([$name,$id]);}else{$s=$pdo->prepare('INSERT INTO categories(category_name) VALUES(?)');$s->execute([$name]);}header('Location: categories.php?saved=1');exit;}catch(PDOException $e){$error='Category name may already exist.';}}}
+$pageTitle=$edit?'Edit Category':'Add Category';include 'header.php';
+?><div class="form-card narrow"><div class="form-intro"><h3><?=$pageTitle?></h3><p>Create a category for organizing tourist attractions.</p></div><?php if($error): ?><div class="alert error"><?=htmlspecialchars($error)?></div><?php endif; ?><form method="post"><div class="form-group"><label>Category Name *</label><input name="category_name" value="<?=htmlspecialchars($name)?>" required autofocus></div><div class="form-buttons"><button class="btn">Save Category</button><a class="btn secondary" href="categories.php">Cancel</a></div></form></div><?php include 'footer.php'; ?>
