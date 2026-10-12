@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin - VisitHunnasgiriya</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="brand"><img src="logo.png" alt="Logo"> Admin Panel</div>
+    <nav>
+      <a href="#dashboard">Dashboard</a>
+      <a href="#add">Add Place</a>
+      <a href="#manage">Manage Places</a>
+      <a href="index.html">View Site</a>
+      <a href="#">Logout</a>
+    </nav>
+  </header>
+
+  <!-- Dashboard -->
+  <section id="dashboard">
+    <h2>Dashboard</h2>
+    <p class="sub">Welcome back. Manage the places shown on the site.</p>
+    <div class="stats">
+      <div class="stat"><span>📍</span><b>10</b>Places</div>
+      <div class="stat"><span>🗂️</span><b>4</b>Categories</div>
+      <div class="stat"><span>🧭</span><b>25 km</b>Radius</div>
+    </div>
+  </section>
+
+  <!-- Add place -->
+  <section id="add">
+    <h2>Add a place</h2>
+    <div class="admin">
+      <form class="form-grid">
+        <input type="text" placeholder="Place name">
+        <select>
+          <option>Nature</option>
+          <option>History</option>
+          <option>Religious</option>
+          <option>Culture</option>
+        </select>
+        <input type="number" placeholder="Distance (km)">
+        <input type="text" placeholder="Location / address">
+        <input type="text" placeholder="Google Maps link">
+        <input type="text" placeholder="Opening hours">
+        <input type="text" placeholder="Best time to visit">
+        <input type="text" placeholder="Visit duration (hours)">
+        <textarea placeholder="Description"></textarea>
+        <textarea placeholder="Travel tips and safety"></textarea>
+        <input type="file">
+        <button class="btn" type="button">Save place</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Manage places -->
+  <section id="manage">
+    <h2>Manage places</h2>
+    <div class="admin">
+      <table>
+        <tr><th>Place</th><th>Category</th><th>km</th><th>Actions</th></tr>
+        <tr><td>Lord Buddha Statue</td><td>Religious</td><td>0.7</td><td><button class="btn light" type="button">Edit</button> <button class="btn light" type="button">Delete</button></td></tr>
+        <tr><td>Bambaragan Oya</td><td>Nature</td><td>3.8</td><td><button class="btn light" type="button">Edit</button> <button class="btn light" type="button">Delete</button></td></tr>
+        <tr><td>Kahatagolla Waterfall</td><td>Nature</td><td>4.2</td><td><button class="btn light" type="button">Edit</button> <button class="btn light" type="button">Delete</button></td></tr>
+        <tr><td>Katahera Waterfall</td><td>Nature</td><td>6.5</td><td><button class="btn light" type="button">Edit</button> <button class="btn light" type="button">Delete</button></td></tr>
+        <tr><td>Deesten Mini World's End</td><td>Nature</td><td>7.8</td><td><button class="btn light" type="button">Edit</button> <button class="btn light" type="button">Delete</button></td></tr>
+        <tr><td>Alla Gala Waterfall</td><td>Nature</td><td>9.4</td><td><button class="btn light" type="button">Edit</button> <button class="btn light" type="button">Delete</button></td></tr>
+        <tr><td>Pitigoda Village</td><td>Culture</td><td>11</td><td><button class="btn light" type="button">Edit</button> <button class="btn light" type="button">Delete</button></td></tr>
+        <tr><td>Keulgama Sri Dalada Gaman Wiharaya</td><td>History</td><td>17</td><td><button class="btn light" type="button">Edit</button> <button class="btn light" type="button">Delete</button></td></tr>
+        <tr><td>Corbett's Gap</td><td>Nature</td><td>18</td><td><button class="btn light" type="button">Edit</button> <button class="btn light" type="button">Delete</button></td></tr>
+        <tr><td>Wewatenna Camping Site</td><td>Nature</td><td>19</td><td><button class="btn light" type="button">Edit</button> <button class="btn light" type="button">Delete</button></td></tr>
+      </table>
+    </div>
+  </section>
+
+</body>
+</html>

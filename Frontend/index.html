@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VisitHunnasgiriya</title>
+  <link rel="icon" href="logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="brand"><img src="logo.png" alt="Logo"> VisitHunnasgiriya</div>
+    <nav>
+      <a href="#places">Explore</a>
+      <a href="planner.html">My Day Plan</a>
+      <a href="emergency.html">Emergency</a>
+    </nav>
+  </header>
+
+  <!-- Hero + search -->
+  <div class="hero">
+    <h1>One day in Hunnasgiriya</h1>
+    <p>Discover places within 25 km and plan your day.</p>
+    <div class="searchbar">
+      <input type="text" placeholder="Search a waterfall, viewpoint, temple...">
+      <select>
+      <option>All categories</option>
+      <option>Nature</option>
+      <option>History</option>
+      <option>Religious</option>
+      <option>Culture</option>
+    </select>
+      <button class="btn" type="button">Search</button>
+    </div>
+  </div>
+
+  <!-- Category chips -->
+  <div class="chips">
+    <span class="chip active">All</span>
+    <span class="chip">Nature</span>
+    <span class="chip">History</span>
+    <span class="chip">Religious</span>
+    <span class="chip">Culture</span>
+  </div>
+
+  <!-- Places -->
+  <section id="places">
+    <h2>Places to visit</h2>
+    <p class="sub">10 places within 25 km of Hunnasgiriya</p>
+    <div class="cards">
+
+      <div class="card religious">
+        <div class="thumb">🙏<img src="assets/images/Loardstatue.JPG" alt="Lord Buddha Statue" onerror="this.style.display='none'"></div>
+        <div class="info">
+        <span class="tag">Religious · 0.7 km</span>
+        <h3>Lord Buddha Statue</h3>
+        <p>Roadside mountain-view landmark on the A26 highway.</p>
+        <a class="btn" href="planner.html">Add to plan</a>
+          <a class="btn light" href="details.html#buddha">Details</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb">💧<img src="assets/images/bambaran.jpg" alt="Bambaragan Oya" onerror="this.style.display='none'"></div>
+        <div class="info">
+        <span class="tag">Nature · 3.8 km</span>
+        <h3>Bambaragan Oya</h3>
+        <p>A stream that forms several waterfalls close together.</p>
+        <a class="btn" href="planner.html">Add to plan</a>
+          <a class="btn light" href="details.html#bambaragan">Details</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb">💧<img src="assets/images/kahatagolla_alla.jpg" alt="Kahatagolla Waterfall" onerror="this.style.display='none'"></div>
+        <div class="info">
+        <span class="tag">Nature · 4.2 km</span>
+        <h3>Kahatagolla Waterfall</h3>
+        <p>Falls beside a bridge, twisting over rock.</p>
+        <a class="btn" href="planner.html">Add to plan</a>
+          <a class="btn light" href="details.html#kahatagolla">Details</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb">💧<img src="assets/images/katahara.jpg" alt="Katahera Waterfall" onerror="this.style.display='none'"></div>
+        <div class="info">
+        <span class="tag">Nature · 6.5 km</span>
+        <h3>Katahera Waterfall</h3>
+        <p>A hidden 10 m waterfall surrounded by greenery.</p>
+        <a class="btn" href="planner.html">Add to plan</a>
+          <a class="btn light" href="details.html#katahera">Details</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb">⛰️<img src="assets/images/deanston.webp" alt="Deesten Mini World's End" onerror="this.style.display='none'"></div>
+        <div class="info">
+        <span class="tag">Nature · 7.8 km</span>
+        <h3>Deesten Mini World's End</h3>
+        <p>A scenic cliff viewpoint with wide valley views.</p>
+        <a class="btn" href="planner.html">Add to plan</a>
+          <a class="btn light" href="details.html#deesten">Details</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb">🌬️<img src="assets/images/alla.webp" alt="Alla Gala Waterfall" onerror="this.style.display='none'"></div>
+        <div class="info">
+        <span class="tag">Nature · 9.4 km</span>
+        <h3>Alla Gala Waterfall</h3>
+        <p>Known for its "reverse waterfall" in windy season.</p>
+        <a class="btn" href="planner.html">Add to plan</a>
+          <a class="btn light" href="details.html#allagala">Details</a>
+        </div>
+      </div>
+
+      <div class="card culture">
+        <div class="thumb">🏡<img src="assets/images/pitigoda.jpg" alt="Pitigoda Village" onerror="this.style.display='none'"></div>
+        <div class="info">
+        <span class="tag">Culture · 11 km</span>
+        <h3>Pitigoda Village</h3>
+        <p>A hidden village where forest meets the reservoir.</p>
+        <a class="btn" href="planner.html">Add to plan</a>
+          <a class="btn light" href="details.html#pitigoda">Details</a>
+        </div>
+      </div>
+
+      <div class="card history">
+        <div class="thumb">🛕<img src="assets/images/keulgama.JPG" alt="Keulgama Sri Dalada Gaman Wiharaya" onerror="this.style.display='none'"></div>
+        <div class="info">
+        <span class="tag">History · 17 km</span>
+        <h3>Keulgama Sri Dalada Gaman Wiharaya</h3>
+        <p>Historic cave temple that once sheltered the Tooth Relic.</p>
+        <a class="btn" href="planner.html">Add to plan</a>
+          <a class="btn light" href="details.html#keulgama">Details</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb">🌄<img src="assets/images/cobert.jpg" alt="Corbett's Gap" onerror="this.style.display='none'"></div>
+        <div class="info">
+        <span class="tag">Nature · 18 km</span>
+        <h3>Corbett's Gap</h3>
+        <p>A high mountain pass with deep valley views.</p>
+        <a class="btn" href="planner.html">Add to plan</a>
+          <a class="btn light" href="details.html#corbetts">Details</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb">⛺<img src="assets/images/wawa.jpg" alt="Wewatenna Camping Site" onerror="this.style.display='none'"></div>
+        <div class="info">
+          <span class="tag">Nature · 19 km</span>
+          <h3>Wewatenna Camping Site</h3>
+          <p>A remote wilderness retreat near Medamahanuwara.</p>
+          <a class="btn" href="planner.html">Add to plan</a>
+          <a class="btn light" href="details.html#wewatenna">Details</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+
+</body>
+</html>
