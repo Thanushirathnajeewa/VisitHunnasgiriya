@@ -5,10 +5,10 @@ $pageTitle = "My Day Plan";
 
 $_SESSION['plan']     = $_SESSION['plan'] ?? [];
 $_SESSION['start']    = $_SESSION['start'] ?? '08:00';
-$_SESSION['lunch']    = $_SESSION['lunch'] ?? 45;      // minutes, 0 = no lunch
+$_SESSION['lunch']    = $_SESSION['lunch'] ?? 45;     
 $plan = &$_SESSION['plan'];
 
-/* ---------- actions (POST) ---------- */
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     csrf_check();
     $action = $_POST['action'] ?? '';

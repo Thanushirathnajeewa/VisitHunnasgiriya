@@ -135,7 +135,7 @@ nav a.cta:hover {
   filter: none;
 }
 
-/* ---------- Hero ---------- */
+
 .hero {
   position: relative;
   overflow: hidden;
@@ -518,7 +518,7 @@ form.inl { display: inline; margin: 0; }
 
 .note { font-size: 0.8rem; color: var(--muted); }
 
-/* ---------- Admin ---------- */
+
 .stats {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));

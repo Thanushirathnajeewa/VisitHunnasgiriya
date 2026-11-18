@@ -1,5 +1,5 @@
 <?php
-// One login page for admins and visitors.
+
 require __DIR__ . '/config/db.php';
 require __DIR__ . '/includes/functions.php';
 if (is_admin()) redirect('admin/dashboard.php');
@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         unset($_SESSION['admin_id']);
         redirect($next ?: 'index.php');
     }
-    usleep(500000);                                   // slows down password guessing
+    usleep(500000);                                   
     $error = 'Wrong email or password.';
 }
 ?>

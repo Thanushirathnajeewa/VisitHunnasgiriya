@@ -1,5 +1,5 @@
 <?php
-// Visitor registration (saved in the `users` table).
+
 require __DIR__ . '/config/db.php';
 require __DIR__ . '/includes/functions.php';
 if (is_admin() || is_user()) redirect('index.php');

@@ -1,5 +1,5 @@
 <?php
-// Change password - works for a logged-in admin or visitor.
+
 require __DIR__ . '/config/db.php';
 require __DIR__ . '/includes/functions.php';
 if (!is_admin() && !is_user()) redirect('login.php?next=change-password.php');
