@@ -110,5 +110,4 @@ include __DIR__ . '/admin_header.php';
       </table>
     </div>
   </section>
-</body>
-</html>
+<?php include __DIR__ . '/admin_footer.php'; ?>

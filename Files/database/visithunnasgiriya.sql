@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 07, 2026 at 03:44 AM
+-- Generation Time: Oct 25, 2026 at 05:56 AM
 -- Server version: 9.1.0
 -- PHP Version: 8.3.14
 
@@ -30,11 +30,11 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `admins`;
 CREATE TABLE IF NOT EXISTS `admins` (
   `admin_id` int NOT NULL AUTO_INCREMENT,
-  `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `password` varchar(255) NOT NULL,
+  `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`admin_id`),
   UNIQUE KEY `username` (`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `admins`
@@ -53,20 +53,20 @@ DROP TABLE IF EXISTS `attractions`;
 CREATE TABLE IF NOT EXISTS `attractions` (
   `attraction_id` int NOT NULL AUTO_INCREMENT,
   `category_id` int NOT NULL,
-  `name` varchar(150) NOT NULL,
-  `description` text,
-  `location` varchar(255) DEFAULT NULL,
-  `opening_hours` varchar(100) DEFAULT NULL,
-  `best_time_to_visit` varchar(150) DEFAULT NULL,
-  `estimated_visit_duration` varchar(100) DEFAULT NULL,
+  `name` varchar(150) COLLATE utf8mb4_general_ci NOT NULL,
+  `description` text COLLATE utf8mb4_general_ci,
+  `location` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `opening_hours` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `best_time_to_visit` varchar(150) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `estimated_visit_duration` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `distance_km` decimal(5,2) DEFAULT NULL,
-  `travel_time` varchar(100) DEFAULT NULL,
-  `google_maps_link` text,
-  `road_condition` text,
+  `travel_time` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `google_maps_link` text COLLATE utf8mb4_general_ci,
+  `road_condition` text COLLATE utf8mb4_general_ci,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`attraction_id`),
   KEY `category_id` (`category_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `attractions`
@@ -209,10 +209,20 @@ INSERT INTO `emergency_contacts` (`contact_id`, `service_name`, `contact_number`
 DROP TABLE IF EXISTS `itineraries`;
 CREATE TABLE IF NOT EXISTS `itineraries` (
   `itinerary_id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int DEFAULT NULL,
   `itinerary_name` varchar(150) NOT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`itinerary_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`itinerary_id`),
+  KEY `user_id` (`user_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `itineraries`
+--
+
+INSERT INTO `itineraries` (`itinerary_id`, `user_id`, `itinerary_name`, `created_at`) VALUES
+(1, 2, 'buddhika', '2026-10-25 03:28:43'),
+(2, 3, 'chalani', '2026-10-25 03:52:01');
 
 -- --------------------------------------------------------
 
@@ -229,7 +239,16 @@ CREATE TABLE IF NOT EXISTS `itinerary_items` (
   PRIMARY KEY (`item_id`),
   KEY `itinerary_id` (`itinerary_id`),
   KEY `attraction_id` (`attraction_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `itinerary_items`
+--
+
+INSERT INTO `itinerary_items` (`item_id`, `itinerary_id`, `attraction_id`, `visit_order`) VALUES
+(1, 1, 9, 1),
+(2, 1, 5, 2),
+(3, 2, 9, 1);
 
 -- --------------------------------------------------------
 
@@ -241,13 +260,13 @@ DROP TABLE IF EXISTS `restaurants`;
 CREATE TABLE IF NOT EXISTS `restaurants` (
   `restaurant_id` int NOT NULL AUTO_INCREMENT,
   `attraction_id` int DEFAULT NULL,
-  `name` varchar(150) NOT NULL,
-  `location` varchar(255) DEFAULT NULL,
+  `name` varchar(150) COLLATE utf8mb4_general_ci NOT NULL,
+  `location` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `estimated_spending` decimal(10,2) DEFAULT NULL,
-  `description` text,
+  `description` text COLLATE utf8mb4_general_ci,
   PRIMARY KEY (`restaurant_id`),
   KEY `attraction_id` (`attraction_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `restaurants`
@@ -259,7 +278,9 @@ INSERT INTO `restaurants` (`restaurant_id`, `attraction_id`, `name`, `location`,
 (3, 1, 'Shanthi Uyana', 'Wadawalakanda, Meemure', 1500.00, 'Hotel and restaurant located in the Wadawalakanda and Meemure area.'),
 (4, 1, 'Hillside Hotel', 'Galkale, Medamahanuwara, Hunnasgiriya', 1800.00, 'Hotel located in the Galkale, Medamahanuwara area near Hunnasgiriya.'),
 (5, 1, 'Chathurika Hotel', 'A26, Hunnasgiriya', 1200.00, 'Local restaurant located along the A26 road in Hunnasgiriya.'),
-(6, 10, 'Priyangi Hills ', ' No. 209, Kandy Road, Udadumbara, Sri Lanka', 2500.00, 'Contact Numbers: +94 72 748 5425 / +94 77 069 8858');
+(6, 10, 'Priyangi Hills ', ' No. 209, Kandy Road, Udadumbara, Sri Lanka', 2500.00, 'Contact Numbers: +94 72 748 5425 / +94 77 069 8858'),
+(7, 9, 'Chathurika Hotel', 'A26, Hunnasgiriya', 900.00, 'Affordable dining with full fried rice at Rs. 900.00 and small portion meals starting from Rs. 100.00.\r\n\r\nT.P-  +9471-5128969'),
+(8, 9, 'Priyangi Hills', 'No. 209, Kandy Road, Udadumbara, Sri Lanka', 2500.00, NULL);
 
 -- --------------------------------------------------------
 
@@ -271,11 +292,11 @@ DROP TABLE IF EXISTS `travel_tips`;
 CREATE TABLE IF NOT EXISTS `travel_tips` (
   `tip_id` int NOT NULL AUTO_INCREMENT,
   `attraction_id` int NOT NULL,
-  `tip_type` enum('Travel','Safety') NOT NULL,
-  `tip_description` text NOT NULL,
+  `tip_type` enum('Travel','Safety') COLLATE utf8mb4_general_ci NOT NULL,
+  `tip_description` text COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`tip_id`),
   KEY `attraction_id` (`attraction_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `travel_tips`
@@ -295,7 +316,9 @@ INSERT INTO `travel_tips` (`tip_id`, `attraction_id`, `tip_type`, `tip_descripti
 (11, 2, 'Travel', 'Plan your visit during daylight hours to enjoy the surrounding natural scenery.'),
 (12, 2, 'Travel', 'Carry essential items such as drinking water, snacks and a fully charged mobile phone.'),
 (13, 2, 'Safety', 'Be careful when walking near steep slopes, rocks and wet surfaces.'),
-(14, 2, 'Safety', 'Avoid entering restricted areas or travelling alone in unfamiliar locations.');
+(14, 2, 'Safety', 'Avoid entering restricted areas or travelling alone in unfamiliar locations.'),
+(15, 10, 'Safety', 'Be careful because the stones are slippery.'),
+(16, 7, 'Safety', 'Be careful with water level');
 
 -- --------------------------------------------------------
 
@@ -306,20 +329,22 @@ INSERT INTO `travel_tips` (`tip_id`, `attraction_id`, `tip_type`, `tip_descripti
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `user_id` int NOT NULL AUTO_INCREMENT,
-  `full_name` varchar(100) NOT NULL,
-  `email` varchar(150) NOT NULL,
-  `password` varchar(255) NOT NULL,
+  `full_name` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(150) COLLATE utf8mb4_general_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`user_id`, `full_name`, `email`, `password`, `created_at`) VALUES
-(1, 'thanushi rathnajeewa', 'thanushirathnajeewa@gmail.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llCz9QzQ6L0vJ6nXj6nO', '2026-09-26 13:19:16');
+(1, 'thanushi rathnajeewa', 'thanushirathnajeewa@gmail.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llCz9QzQ6L0vJ6nXj6nO', '2026-09-26 13:19:16'),
+(2, 'Dinushi rathnajeewa', 'dinushirathnajeewa@gmail.com', '$2y$10$JxRQ9s5FVQXS7YHHsq8Zp.p.JbbE35EOk3llF9Rys5Ldjia6IKIQ.', '2026-10-25 03:18:21'),
+(3, 'chalani', 'chalanirathnajeewa@gmail.com', '$2y$10$8d8RByMA7GyJfYtAslMhmuh/u4xWTkTnpzsTpPbha9bILKXeCV9lK', '2026-10-25 03:51:53');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

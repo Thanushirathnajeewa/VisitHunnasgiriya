@@ -29,7 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif ($action === 'settings') {
         if (preg_match('/^([01]\d|2[0-3]):[0-5]\d$/', $_POST['start'] ?? '')) $_SESSION['start'] = $_POST['start'];
         $_SESSION['lunch'] = isset($_POST['lunch']) ? 45 : 0;
-    } elseif ($action === 'save' && $plan) {
+    } elseif ($action === 'save') {
+        if (!$plan) { redirect('planner.php'); }
         if (!is_user()) { flash_set("Please log in to save your plan.", 'err'); redirect('login.php?next=planner.php'); }
         $name = trim($_POST['name'] ?? '');
         $hasCol = (bool)$pdo->query("SHOW COLUMNS FROM itineraries LIKE 'user_id'")->fetch();
@@ -46,17 +47,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     redirect('planner.php');
 }
 
-/* ---------- load a saved plan (GET) ---------- */
+
 if (isset($_GET['plan'])) {
+    $pid = (int)$_GET['plan'];
+    if (!is_user()) {
+        flash_set("Log in to open a saved plan.", 'err');
+        redirect('login.php?next=' . urlencode("planner.php?plan=$pid"));
+    }
+    $own = $pdo->prepare("SELECT 1 FROM itineraries WHERE itinerary_id = ? AND user_id = ?");
+    $own->execute([$pid, $_SESSION['user_id']]);
+    if (!$own->fetch()) {
+        flash_set("Saved plan not found.", 'err');
+        redirect('planner.php');
+    }
     $st = $pdo->prepare("SELECT attraction_id FROM itinerary_items WHERE itinerary_id = ? ORDER BY visit_order");
-    $st->execute([(int)$_GET['plan']]);
+    $st->execute([$pid]);
     $ids = $st->fetchAll(PDO::FETCH_COLUMN);
     if ($ids) { $plan = array_map('intval', $ids); flash_set("Saved plan loaded."); }
     else flash_set("Saved plan not found.", 'err');
     redirect('planner.php');
 }
 
-/* ---------- build the timetable ---------- */
+
 $stops = [];
 if ($plan) {
     $in = implode(',', array_fill(0, count($plan), '?'));
@@ -138,9 +150,9 @@ include __DIR__ . '/includes/header.php';
         </form>
 
         <div class="summary">
-          <div><b><?= count($plan) ?></b>stops</div>
-          <div><b>~<?= round($dist) ?> km</b>distance</div>
-          <div><b><?= fmt_time($finish) ?></b>finish</div>
+          <div><b><?= count($plan) ?></b> stops</div>
+          <div><b>~<?= round($dist) ?> km</b> distance</div>
+          <div><b><?= fmt_time($finish) ?></b> finish</div>
         </div>
         <p class="note">Times are estimates. Check road and weather before you travel.</p>
 
@@ -154,7 +166,8 @@ include __DIR__ . '/includes/header.php';
         <?php else: ?>
         <div class="box white">
           <h3>Save this plan</h3>
-          <p><a href="login.php?next=planner.php">Log in</a> or <a href="register.php?next=planner.php">register</a> to save your plan and open it later.</p>
+          <p>Your plan is only stored in this browser session until you leave or clear it.</p>
+          <p><a href="login.php?next=planner.php">Log in</a> or <a href="register.php?next=planner.php">register</a> to save plans to your account and open them later under My Plans.</p>
         </div>
         <?php endif; ?>
         <div class="btn-row">

@@ -110,5 +110,4 @@ $field = fn($k, $label, $type = 'text') => '<label>' . $label . '<input type="' 
       </form>
     </div>
   </section>
-</body>
-</html>
+<?php include __DIR__ . '/../includes/admin_footer.php'; ?>

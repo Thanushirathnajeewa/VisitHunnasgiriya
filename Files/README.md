@@ -1,5 +1,10 @@
 # VisitHunnasgiriya - PHP + MySQL backend
 
+## Open the site the right way
+- **Do not** double-click `Frontend/index.html`. That old mock page is not the app.
+- Put the project in WAMP `www`, start Apache + MySQL, then open **`Backend/index.php`** in the browser (e.g. `http://localhost/VisitHunnasgiriya/Backend/index.php`).
+- Photos and logo must live in **`Backend/assets/images/`** and **`Backend/logo.png`** (see step 4 below).
+
 ## 1. Install (WAMP)
 1. Copy the `VisitHunnasgiriya` folder into `C:\wamp64\www\`.
 2. Open phpMyAdmin, create/import the database from `database/visithunnasgiriya.sql`
@@ -8,7 +13,8 @@
    editor and replace `utf8mb4_0900_ai_ci` with `utf8mb4_general_ci`, then import again.
 3. Check `config/db.php` (default: user `root`, empty password).
 4. Copy your place photos into `assets/images/` (same file names as in the database).
-5. Open http://localhost/VisitHunnasgiriya/
+5. Open http://localhost/VisitHunnasgiriya/Backend/index.php
+   (or http://localhost/VisitHunnasgiriya/ — redirects to Backend)
 
 ## 2. Login (admins and visitors use the same page)
 Open http://localhost/visithunnasgiriyapro/Backend/login.php

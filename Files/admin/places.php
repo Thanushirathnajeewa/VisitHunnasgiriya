@@ -52,5 +52,4 @@ include __DIR__ . '/../includes/admin_header.php';
       </table>
     </div>
   </section>
-</body>
-</html>
+<?php include __DIR__ . '/../includes/admin_footer.php'; ?>

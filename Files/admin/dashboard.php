@@ -20,10 +20,9 @@ $stats = [
     <?= flash_show() ?>
     <div class="stats">
       <?php foreach ($stats as [$icon, $n, $label, $link]): ?>
-        <a class="stat" href="<?= $link ?>" style="text-decoration:none"><span><?= $icon ?></span><b><?= $n ?></b><?= e($label) ?></a>
+        <a class="stat" href="<?= $link ?>"><span><?= $icon ?></span><b><?= $n ?></b><?= e($label) ?></a>
       <?php endforeach; ?>
     </div>
     <p style="margin-top:24px"><a class="btn" href="place-form.php">+ Add a place</a></p>
   </section>
-</body>
-</html>
+<?php include __DIR__ . '/../includes/admin_footer.php'; ?>

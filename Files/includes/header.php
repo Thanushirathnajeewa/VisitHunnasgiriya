@@ -10,11 +10,11 @@ $planCount = count($_SESSION['plan'] ?? []);
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title><?= e($pageTitle ?? 'VisitHunnasgiriya') ?> - VisitHunnasgiriya</title>
   <link rel="icon" href="logo.png">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <?php include __DIR__ . '/fonts.php'; ?>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
+  <header class="site-header">
     <a class="brand" href="index.php"><img src="logo.png" alt="Logo"> VisitHunnasgiriya</a>
     <nav>
       <a href="index.php#places">Explore</a>

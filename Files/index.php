@@ -22,6 +22,7 @@ $sql .= " ORDER BY a.distance_km";
 $st = $pdo->prepare($sql);
 $st->execute($params);
 $rows = $st->fetchAll();
+
 $inPlan = $_SESSION['plan'] ?? [];
 
 include __DIR__ . '/includes/header.php';
@@ -65,17 +66,19 @@ include __DIR__ . '/includes/header.php';
             <span class="tag"><?= e($a['category_name']) ?> · <?= e(rtrim(rtrim($a['distance_km'], '0'), '.')) ?> km</span>
             <h3><?= e($a['name']) ?></h3>
             <p><?= e(shorten($a['description'] ?? '', 110)) ?></p>
-            <form class="inl" method="post" action="planner.php">
-              <?= csrf_field() ?>
-              <input type="hidden" name="action" value="add">
-              <input type="hidden" name="id" value="<?= $a['attraction_id'] ?>">
-              <?php if (in_array($a['attraction_id'], $inPlan)): ?>
-                <a class="btn light" href="planner.php">In your plan ✓</a>
-              <?php else: ?>
-                <button class="btn" type="submit">Add to plan</button>
-              <?php endif; ?>
-            </form>
-            <a class="btn light" href="attraction.php?id=<?= $a['attraction_id'] ?>">Details</a>
+            <div class="btn-row">
+              <form class="inl" method="post" action="planner.php">
+                <?= csrf_field() ?>
+                <input type="hidden" name="action" value="add">
+                <input type="hidden" name="id" value="<?= $a['attraction_id'] ?>">
+                <?php if (in_array($a['attraction_id'], $inPlan)): ?>
+                  <a class="btn light" href="planner.php">In your plan ✓</a>
+                <?php else: ?>
+                  <button class="btn" type="submit">Add to plan</button>
+                <?php endif; ?>
+              </form>
+              <a class="btn light" href="attraction.php?id=<?= $a['attraction_id'] ?>">Details</a>
+            </div>
           </div>
         </div>
       <?php endforeach; ?>

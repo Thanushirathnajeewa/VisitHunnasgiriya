@@ -1,5 +1,5 @@
 <?php
-// A visitor's saved day plans.
+// Registered user's saved day plans (guests cannot save plans).
 require __DIR__ . '/config/db.php';
 require __DIR__ . '/includes/functions.php';
 require_user();
